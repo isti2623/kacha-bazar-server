@@ -24,11 +24,19 @@ async function run() {
         const addProductCollection = database.collection('addProduct');
         const usersCollection = database.collection('userInfo');
         const reviewCollection = database.collection('review');
+        const cartCollection = database.collection('cart');
 
 
         //Product Get Api
         app.get('/addProduct', async (req, res) => {
             const cursor = addProductCollection.find({});
+            const bloodPostReq = await cursor.toArray();
+            res.send(bloodPostReq);
+        })
+
+        //Cart Get Api
+        app.get('/addCart', async (req, res) => {
+            const cursor = cartCollection.find({});
             const bloodPostReq = await cursor.toArray();
             res.send(bloodPostReq);
         })
@@ -42,11 +50,26 @@ async function run() {
             res.send(result);
         })
 
+        //Cart DELETE Api
+        app.delete('/addCart/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await cartCollection.deleteOne(query);
+            res.send(result);
+        })
+
 
         //Product POST Api
         app.post('/addProduct', async (req, res) => {
             const bloodPostReq = req.body;
             const result = await addProductCollection.insertOne(bloodPostReq);
+            res.json(result)
+        })
+
+        //Cart POST Api
+        app.post('/addCart', async (req, res) => {
+            const bloodPostReq = req.body;
+            const result = await cartCollection.insertOne(bloodPostReq);
             res.json(result)
         })
 
