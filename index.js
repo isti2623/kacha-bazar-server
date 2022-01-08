@@ -50,6 +50,16 @@ async function run() {
             res.send(result);
         })
 
+
+        //Single Product get  Api
+        app.get('/addProduct/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const cursor = addProductCollection.find(query);
+            const singleProduct = await cursor.toArray();
+            res.send(singleProduct);
+        })
+
         //Cart DELETE Api
         app.delete('/addCart/:id', async (req, res) => {
             const id = req.params.id;
