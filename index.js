@@ -25,6 +25,7 @@ async function run() {
         const usersCollection = database.collection('userInfo');
         const reviewCollection = database.collection('review');
         const cartCollection = database.collection('cart');
+        const featureCollection = database.collection('feature');
 
 
         //Product Get Api
@@ -32,6 +33,13 @@ async function run() {
             const cursor = addProductCollection.find({});
             const bloodPostReq = await cursor.toArray();
             res.send(bloodPostReq);
+        })
+
+        //Feature Get Api
+        app.get('/addFeature', async (req, res) => {
+            const cursor = featureCollection.find({});
+            const feature = await cursor.toArray();
+            res.send(feature);
         })
 
         //Cart Get Api
