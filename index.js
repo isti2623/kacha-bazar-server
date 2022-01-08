@@ -55,8 +55,8 @@ async function run() {
             const email = req.query.email;
             const query = { email: email }
             const cursor = addProductCollection.find(query);
-            const bloodPostReq = await cursor.toArray();
-            res.send(bloodPostReq);
+            const product = await cursor.toArray();
+            res.send(product);
         })
 
         //find user admin by email
